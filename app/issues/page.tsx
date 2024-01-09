@@ -1,7 +1,8 @@
 import React from 'react'
 import prisma from '@/prisma/client'
 import { Button, Table } from '@radix-ui/themes'
-import Link from 'next/link'
+import Link from '../components/Link' 
+import NextLink from 'next/link'
 import IssueBage from '../components/IssueBage'
 
 const IssuesPage = async () => {
@@ -12,7 +13,7 @@ const IssuesPage = async () => {
         <div>
             <div className='mb-3'>
                 <Button>
-                    <Link href="/issues/new">New Issue</Link>
+                    <NextLink href="/issues/new">New Issue</NextLink>
                 </Button>
             </div>
             <Table.Root variant='surface'>
@@ -27,7 +28,7 @@ const IssuesPage = async () => {
                     {issues.map(issue => (
                         <Table.Row key={issue.id}>
                             <Table.Cell>
-                                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                                <Link href={`/issues/${issue.id}`} label={issue.title}/>
                                 <div className='block md:hidden' ><IssueBage status={issue.status} /></div>
                             </Table.Cell>
                             <Table.Cell className='hidden md:table-cell'><IssueBage status={issue.status} /></Table.Cell>
