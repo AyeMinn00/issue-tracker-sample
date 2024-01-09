@@ -1,4 +1,4 @@
-import IssueBage from '@/app/components/IssueBage'
+import {IssueBage} from '@/app/components'
 import prisma from '@/prisma/client'
 import { Button, Card, Flex, Text } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
