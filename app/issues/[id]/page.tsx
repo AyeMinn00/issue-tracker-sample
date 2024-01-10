@@ -1,8 +1,10 @@
-import {IssueBage} from '@/app/components'
+import { IssueBage } from '@/app/components'
 import prisma from '@/prisma/client'
-import { Button, Card, Flex, Text } from '@radix-ui/themes'
+import { Button, Card, Flex, Grid, Heading, Text, Box } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import React from 'react'
+import { Pencil2Icon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 
 type Props = {
     params: { id: string }
@@ -18,10 +20,10 @@ const IssueDetailPage = async ({ params: { id } }: Props) => {
     if (!issue) notFound()
 
     return (
-        <Flex gap='8'>
-            <Flex direction='column' grow='1' gap='3'>
-                <h4>{issue.title}</h4>
-                <Flex gap='3' align='center'>
+        <Grid columns={{ initial: '1', md: '2' }} gap="5">
+            <Flex direction='column' gap='2'>
+                <Heading>{issue.title}</Heading>
+                <Flex gap='3'>
                     <IssueBage status={issue.status} />
                     <Text>{issue.createdAt.toDateString()}</Text>
                 </Flex>
@@ -29,11 +31,14 @@ const IssueDetailPage = async ({ params: { id } }: Props) => {
                     {issue.description}
                 </Card>
             </Flex>
-            <Flex direction='column' gap="3" shrink='0'>
-                <Button color='violet'>{'Edit Issue'}</Button>
-                <Button color='red'>{'Delete Issue'}</Button>
-            </Flex>
-        </Flex >
+            <Box>
+                <Button>
+                    <Pencil2Icon />
+                    <Link href={`/issues/${issue.id}/edit`} />
+                    Edit Issue
+                </Button>
+            </Box>
+        </Grid>
     )
 }
 
