@@ -1,4 +1,6 @@
-@tailwind base;
+/* be sure radix-ui is below after tailwindcss/base in order to prevent tailwind css override in production */
+@import "tailwindcss/base";
+@import "@radix-ui/themes/styles.css";
 @tailwind components;
 @tailwind utilities;
 
