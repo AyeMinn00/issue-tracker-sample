@@ -6,7 +6,13 @@ import { IssueBage, Link } from '../components'
 
 const IssuesPage = async () => {
 
-    const issues = await prisma.issue.findMany()
+    const issues = await prisma.issue.findMany({
+        orderBy:[
+            {
+                createdAt : 'desc'
+            }
+        ]
+    })
 
     return (
         <div>
@@ -42,3 +48,6 @@ const IssuesPage = async () => {
 }
 
 export default IssuesPage
+
+export const dynamic = 'force-dynamic'
+// export const revalidate = 0
