@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { AiFillBug } from "react-icons/ai";
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames'
+import { useSession } from 'next-auth/react';
 
 type LinkItem = {
     label: string,
@@ -13,6 +14,7 @@ type LinkItem = {
 const Navbar = () => {
 
     const currentPath = usePathname()
+    const { status } = useSession()
 
     const links: LinkItem[] = [
         { label: 'Dashboard', href: '/' },
@@ -32,6 +34,8 @@ const Navbar = () => {
                         <Link href={lnk.href}>{lnk.label}</Link>
                     </li>
                 )}
+                <li>{status === 'authenticated' && <Link href='/api/auth/signout'>Log out</Link>}</li>
+                <li>{status === 'unauthenticated' && <Link href='/api/auth/signin'>Log in</Link>}</li>
             </ul>
         </nav>
     )
