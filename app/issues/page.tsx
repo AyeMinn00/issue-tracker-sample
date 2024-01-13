@@ -1,6 +1,6 @@
-import React from 'react'
 import prisma from '@/prisma/client'
 import { Button, Table } from '@radix-ui/themes'
+import { Metadata } from 'next'
 import NextLink from 'next/link'
 import { IssueBage, Link } from '../components'
 
@@ -45,6 +45,11 @@ const IssuesPage = async () => {
         </div>
     )
 
+}
+
+export const metadata: Metadata = {
+    title: 'Issue Tracker List',
+    description: 'List all issues'
 }
 
 export default IssuesPage
